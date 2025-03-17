@@ -5,10 +5,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const formatButtons = document.querySelectorAll('.format-btn');
     const successMessage = document.querySelector('.success-message');
     
+    // Function to handle download start
+    const handleDownloadStart = (button, databaseName, format) => {
+        // Add loading state
+        button.classList.add('loading');
+        
+        // Show success message
+        successMessage.textContent = `${databaseName} (.${format}) download started!`;
+        successMessage.classList.add('show');
+        
+        // Remove loading state after 2 seconds
+        setTimeout(() => {
+            button.classList.remove('loading');
+            
+            // Hide the format options
+            formatOptions.forEach(options => {
+                options.classList.remove('show');
+            });
+            
+            // Hide success message after 2.5 seconds
+            setTimeout(() => {
+                successMessage.classList.remove('show');
+            }, 2500);
+        }, 2000);
+    };
+    
     // Add click event listeners to main buttons
     mainButtons.forEach(button => {
         button.addEventListener('click', function(e) {
-            e.stopPropagation(); // Prevent event from bubbling up
+            e.stopPropagation();
             
             // Get the database name
             const databaseName = this.getAttribute('data-name');
@@ -21,12 +46,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 targetFormatOptions = document.getElementById('extended-formats');
             }
             
-            // Toggle format options visibility
+            // Toggle format options with animation
             formatOptions.forEach(options => {
                 if (options === targetFormatOptions) {
-                    options.classList.toggle('show');
-                } else {
-                    options.classList.remove('show');
+                    if (options.classList.contains('show')) {
+                        options.classList.remove('show');
+                    } else {
+                        // Hide other format options first
+                        formatOptions.forEach(opt => {
+                            if (opt !== options) {
+                                opt.classList.remove('show');
+                            }
+                        });
+                        // Show this format options after a small delay
+                        setTimeout(() => {
+                            options.classList.add('show');
+                        }, 100);
+                    }
                 }
             });
         });
@@ -35,33 +71,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add click event listeners to format buttons
     formatButtons.forEach(button => {
         button.addEventListener('click', function(e) {
-            // We'll let the default action happen (following the href link)
-            
-            // Show download animation
-            const indicator = this.querySelector('.indicator');
-            indicator.style.width = '100%';
-            
             // Get database name and format
             const databaseName = this.getAttribute('data-name');
             const format = this.getAttribute('data-format');
             
-            // Show success message
-            successMessage.textContent = `${databaseName} (.${format}) download started!`;
-            successMessage.classList.add('show');
-            
-            // Reset the animation and hide success message after download starts
-            setTimeout(() => {
-                indicator.style.width = '0';
-                
-                // Hide the format options
-                formatOptions.forEach(options => {
-                    options.classList.remove('show');
-                });
-                
-                setTimeout(() => {
-                    successMessage.classList.remove('show');
-                }, 2500);
-            }, 500);
+            // Handle download start
+            handleDownloadStart(this, databaseName, format);
         });
     });
     
@@ -69,27 +84,34 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('click', function(e) {
         if (!e.target.closest('.button-group')) {
             formatOptions.forEach(options => {
-                options.classList.remove('show');
+                if (options.classList.contains('show')) {
+                    options.classList.remove('show');
+                }
             });
         }
     });
     
-    // Theme toggle functionality (light/dark mode)
+    // Theme toggle functionality with smooth transition
     const themeToggle = document.getElementById('theme-toggle');
     
     if (themeToggle) {
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-theme');
-            
-            // Save theme preference
-            const isDarkTheme = document.body.classList.contains('dark-theme');
-            localStorage.setItem('dark-theme', isDarkTheme);
-            
-            // Update toggle text
-            themeToggle.textContent = isDarkTheme ? '☀️ Light Mode' : '🌙 Dark Mode';
-        });
+        const toggleTheme = (isDark) => {
+            document.body.classList.toggle('dark-theme', isDark);
+            localStorage.setItem('dark-theme', isDark);
+            themeToggle.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
+        };
         
-        // Set dark theme as default
-        localStorage.setItem('dark-theme', 'true');
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('dark-theme');
+        if (savedTheme !== null) {
+            toggleTheme(savedTheme === 'true');
+        } else {
+            // Set dark theme as default
+            toggleTheme(true);
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            toggleTheme(!document.body.classList.contains('dark-theme'));
+        });
     }
 });

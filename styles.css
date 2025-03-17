@@ -1,0 +1,204 @@
+/* Modern CSS with variables for easy theming */
+:root {
+    --primary-color: #6c5ce7;
+    --secondary-color: #a29bfe;
+    --accent-color: #fd79a8;
+    --text-color: #2d3436;
+    --background-color: #f9f9f9;
+    --card-background: #ffffff;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --transition-speed: 0.3s;
+}
+
+/* Dark theme variables */
+.dark-theme {
+    --primary-color: #9c88ff;
+    --secondary-color: #8c7ae6;
+    --accent-color: #ff6b81;
+    --text-color: #f5f6fa;
+    --background-color: #2f3640;
+    --card-background: #353b48;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, var(--background-color), var(--secondary-color) 120%);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background var(--transition-speed) ease;
+}
+
+.container {
+    width: 90%;
+    max-width: 500px;
+    padding: 2.5rem;
+    background-color: var(--card-background);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px var(--shadow-color);
+    text-align: center;
+    transition: background-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    transition: color var(--transition-speed) ease;
+}
+
+.download-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.download-btn {
+    position: relative;
+    padding: 1.2rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all var(--transition-speed) ease;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.northwind {
+    background-color: var(--primary-color);
+}
+
+.extended {
+    background-color: var(--accent-color);
+}
+
+.download-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 7px 14px rgba(0, 0, 0, 0.2);
+}
+
+.download-btn:active {
+    transform: translateY(-2px);
+}
+
+/* Animation for the download indicator */
+.download-btn .indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.7);
+    width: 0;
+    transition: width 0.5s ease-in-out;
+}
+
+/* Success message styling */
+.success-message {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    border-radius: 8px;
+    background-color: rgba(46, 213, 115, 0.2);
+    color: #2ed573;
+    font-weight: 500;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    height: 0;
+    overflow: hidden;
+}
+
+.success-message.show {
+    opacity: 1;
+    height: auto;
+}
+
+/* Theme toggle button */
+#theme-toggle {
+    margin-top: 1.5rem;
+    padding: 0.7rem 1.2rem;
+    background-color: transparent;
+    color: var(--text-color);
+    border: 1px solid var(--text-color);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all var(--transition-speed) ease;
+    width: 100%;
+}
+
+#theme-toggle:hover {
+    background-color: var(--text-color);
+    color: var(--card-background);
+}
+
+/* Footer styling */
+.footer {
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    opacity: 0.8;
+    transition: opacity var(--transition-speed) ease;
+}
+
+.footer:hover {
+    opacity: 1;
+}
+
+.author-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    transition: all var(--transition-speed) ease;
+}
+
+.author-link:hover {
+    color: var(--accent-color);
+}
+
+.author-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: var(--accent-color);
+    transition: width var(--transition-speed) ease;
+}
+
+.author-link:hover::after {
+    width: 100%;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 1.5rem;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .download-btn {
+        padding: 1rem;
+        font-size: 1rem;
+    }
+}

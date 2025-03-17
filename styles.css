@@ -8,6 +8,9 @@
     --card-background: #ffffff;
     --shadow-color: rgba(0, 0, 0, 0.1);
     --transition-speed: 0.3s;
+    --bak-color: #0984e3;
+    --bacpac-color: #00b894;
+    --overlay-color: rgba(0, 0, 0, 0.7);
 }
 
 /* Dark theme variables */
@@ -19,14 +22,19 @@
     --background-color: #2f3640;
     --card-background: #353b48;
     --shadow-color: rgba(0, 0, 0, 0.3);
+    --bak-color: #0097e6;
+    --bacpac-color: #55efc4;
+    --overlay-color: rgba(0, 0, 0, 0.8);
 }
 
+/* Reset default styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Body styles */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, var(--background-color), var(--secondary-color) 120%);
@@ -38,6 +46,18 @@ body {
     transition: background var(--transition-speed) ease;
 }
 
+/* Theme styles */
+body.dark-theme {
+    background-color: #1a1a1a;
+    color: #ffffff;
+}
+
+body:not(.dark-theme) {
+    background-color: #ffffff;
+    color: #333333;
+}
+
+/* Container styles */
 .container {
     width: 90%;
     max-width: 500px;
@@ -47,8 +67,10 @@ body {
     box-shadow: 0 10px 30px var(--shadow-color);
     text-align: center;
     transition: background-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    z-index: 1;
 }
 
+/* Heading styles */
 h1 {
     font-size: 2.5rem;
     margin-bottom: 2rem;
@@ -57,13 +79,23 @@ h1 {
     transition: color var(--transition-speed) ease;
 }
 
+/* Download buttons container */
 .download-buttons {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
 }
 
-.download-btn {
+/* Button group styles */
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    position: relative;
+}
+
+/* Main button styles */
+.main-btn {
     position: relative;
     padding: 1.2rem;
     font-size: 1.2rem;
@@ -78,6 +110,7 @@ h1 {
     align-items: center;
     justify-content: center;
     color: white;
+    z-index: 1;
 }
 
 .northwind {
@@ -88,17 +121,70 @@ h1 {
     background-color: var(--accent-color);
 }
 
-.download-btn:hover {
+.main-btn:hover {
     transform: translateY(-5px);
     box-shadow: 0 7px 14px rgba(0, 0, 0, 0.2);
 }
 
-.download-btn:active {
+.main-btn:active {
     transform: translateY(-2px);
 }
 
-/* Animation for the download indicator */
-.download-btn .indicator {
+/* Format options styles */
+.format-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+    opacity: 0;
+    transform: translateY(-10px);
+    margin-top: 0.5rem;
+}
+
+.format-options.show {
+    max-height: 200px;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Format button styles */
+.format-btn {
+    position: relative;
+    padding: 0.8rem;
+    font-size: 1rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all var(--transition-speed) ease;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.format-btn.bak {
+    background-color: var(--bak-color);
+}
+
+.format-btn.bacpac {
+    background-color: var(--bacpac-color);
+}
+
+.format-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.format-btn:active {
+    transform: translateY(-1px);
+}
+
+.format-btn .indicator {
     position: absolute;
     top: 0;
     left: 0;
@@ -108,7 +194,7 @@ h1 {
     transition: width 0.5s ease-in-out;
 }
 
-/* Success message styling */
+/* Success message styles */
 .success-message {
     margin-top: 1rem;
     padding: 0.5rem;
@@ -127,9 +213,16 @@ h1 {
     height: auto;
 }
 
-/* Theme toggle button */
-#theme-toggle {
+/* Button row styles */
+.button-row {
+    display: flex;
+    gap: 1rem;
     margin-top: 1.5rem;
+}
+
+/* Theme toggle button styles */
+#theme-toggle {
+    flex: 1;
     padding: 0.7rem 1.2rem;
     background-color: transparent;
     color: var(--text-color);
@@ -138,7 +231,6 @@ h1 {
     cursor: pointer;
     font-size: 0.9rem;
     transition: all var(--transition-speed) ease;
-    width: 100%;
 }
 
 #theme-toggle:hover {
@@ -146,7 +238,7 @@ h1 {
     color: var(--card-background);
 }
 
-/* Footer styling */
+/* Footer styles */
 .footer {
     margin-top: 2rem;
     font-size: 0.9rem;
@@ -186,19 +278,34 @@ h1 {
     width: 100%;
 }
 
-/* Responsive design */
+/* Responsive styles */
 @media (max-width: 768px) {
     .container {
         width: 95%;
         padding: 1.5rem;
     }
-    
+
     h1 {
         font-size: 2rem;
     }
-    
-    .download-btn {
+
+    .main-btn {
         padding: 1rem;
         font-size: 1rem;
+    }
+    
+    .format-btn {
+        padding: 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    .button-row {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    #theme-toggle {
+        width: 100%;
+        padding: 0.8rem;
     }
 }

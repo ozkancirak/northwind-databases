@@ -2,8 +2,6 @@
 
 A simple web application for downloading Northwind and Northwind Extended database files in various formats. Created for the **CPP224 DATABASE AND SOFTWARE SECURITY** course.
 
-![Northwind Databases Interface](screenshot.png)
-
 ## Description
 
 This project provides an easy way for students of the CPP224 DATABASE AND SOFTWARE SECURITY course to access and download SQL Server database files for learning and practical exercises. These sample databases help demonstrate database security concepts and provide a foundation for course assignments.

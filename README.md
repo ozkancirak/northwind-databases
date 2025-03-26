@@ -1,12 +1,14 @@
 # Northwind Databases
 
-A simple web application for downloading Northwind and Northwind Extended database files in various formats.
+A simple web application for downloading Northwind and Northwind Extended database files in various formats. Created for the **CPP224 DATABASE AND SOFTWARE SECURITY** course.
 
 ![Northwind Databases Interface](screenshot.png)
 
 ## Description
 
-This project provides an easy way to access and download SQL Server database files for learning and development purposes. It features:
+This project provides an easy way for students of the CPP224 DATABASE AND SOFTWARE SECURITY course to access and download SQL Server database files for learning and practical exercises. These sample databases help demonstrate database security concepts and provide a foundation for course assignments.
+
+The application features:
 
 - Download options for both Northwind (basic) and Northwind Extended databases
 - Multiple file formats (.bak and .bacpac)
@@ -35,7 +37,6 @@ This project provides an easy way to access and download SQL Server database fil
 2. Choose between Northwind or Northwind Extended databases
 3. Select your preferred format (.bak or .bacpac)
 4. Download will start automatically
-5. Use the theme toggle button to switch between dark and light modes
 
 ## Installation Guide
 
@@ -49,27 +50,6 @@ If you want to run this project locally:
 
 - **BAK files**: SQL Server backup files that can be restored using SQL Server Management Studio
 - **BACPAC files**: Data-tier application files that can be imported into SQL Server or Azure SQL Database
-
-## Release Notes
-
-### Version 1.0.0 (Initial Release)
-
-- First public release
-- Local database files for faster downloads
-- Support for both .bak and .bacpac formats
-- Dark/light theme toggle with persistence
-- Tooltip information about database tables
-- Responsive design for all screen sizes
-
-## Development
-
-This project uses:
-
-- HTML5
-- CSS3
-- Vanilla JavaScript
-
-No build tools or external dependencies required!
 
 ## License
 

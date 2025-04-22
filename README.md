@@ -1,14 +1,14 @@
-# Northwind Databases
+# Northwind Database
 
-A simple web application for downloading Northwind and Northwind Extended database files in various formats. Created for the **CPP224 DATABASE AND SOFTWARE SECURITY** course.
+A simple web application for downloading Northwind database files in various formats. Created for the **CPP224 DATABASE AND SOFTWARE SECURITY** course.
 
 ## Description
 
-This project provides an easy way for students of the CPP224 DATABASE AND SOFTWARE SECURITY course to access and download SQL Server database files for learning and practical exercises. These sample databases help demonstrate database security concepts and provide a foundation for course assignments.
+This project provides an easy way for students of the CPP224 DATABASE AND SOFTWARE SECURITY course to access and download SQL Server database files for learning and practical exercises. This sample database helps demonstrate database security concepts and provides a foundation for course assignments.
 
 The application features:
 
-- Download options for both Northwind (basic) and Northwind Extended databases
+- Download options for Northwind database
 - Multiple file formats (.bak and .bacpac)
 - Responsive design with dark/light mode toggle
 - Easy-to-use interface with tooltips showing table information
@@ -17,24 +17,20 @@ The application features:
 
 ### Northwind
 
-- Customers (5 rows)
-- OrderDetails (5 rows)
-- Products (5 rows)
-
-### Northwind Extended
-
-- Customers (5 rows)
-- OrderDetails (10 rows)
-- Orders (5 rows)
-- Products (9 rows)
-- Suppliers (4 rows)
+- Customers (91 records)
+- Categories (8 records)
+- Employees (10 records)
+- OrderDetails (518 records)
+- Orders (196 records)
+- Products (77 records)
+- Shippers (3 records)
+- Suppliers (29 records)
 
 ## Usage
 
 1. Visit the website
-2. Choose between Northwind or Northwind Extended databases
-3. Select your preferred format (.bak or .bacpac)
-4. Download will start automatically
+2. Select your preferred format (.bak or .bacpac)
+3. Download will start automatically
 
 ## Installation Guide
 

@@ -39,12 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const databaseName = this.getAttribute('data-name');
             
             // Find the corresponding format options
-            let targetFormatOptions;
-            if (databaseName === 'Northwind') {
-                targetFormatOptions = document.getElementById('northwind-formats');
-            } else {
-                targetFormatOptions = document.getElementById('extended-formats');
-            }
+            const targetFormatOptions = document.getElementById('northwind-formats');
             
             // Toggle format options with animation
             formatOptions.forEach(options => {
@@ -90,28 +85,4 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     });
-    
-    // Theme toggle functionality with smooth transition
-    const themeToggle = document.getElementById('theme-toggle');
-    
-    if (themeToggle) {
-        const toggleTheme = (isDark) => {
-            document.body.classList.toggle('dark-theme', isDark);
-            localStorage.setItem('dark-theme', isDark);
-            themeToggle.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
-        };
-        
-        // Check for saved theme preference
-        const savedTheme = localStorage.getItem('dark-theme');
-        if (savedTheme !== null) {
-            toggleTheme(savedTheme === 'true');
-        } else {
-            // Set dark theme as default
-            toggleTheme(true);
-        }
-        
-        themeToggle.addEventListener('click', () => {
-            toggleTheme(!document.body.classList.contains('dark-theme'));
-        });
-    }
 });
